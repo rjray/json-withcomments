@@ -278,7 +278,7 @@ L<https://metacpan.org/release/JSON-WithComments>
 
 =head1 LICENSE AND COPYRIGHT
 
-This file and the code within are copyright © 2017 by Randy J. Ray.
+This file and the code within are copyright (c) 2017 by Randy J. Ray.
 
 Copying and distribution are permitted under the terms of the Artistic
 License 1.0 or the GNU GPL 1. See the file F<LICENSE> in the distribution of
