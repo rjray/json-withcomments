@@ -38,8 +38,9 @@ use Carp ();
 ## no critic(RegularExpressions::RequireExtendedFormatting)
 my $JS_SINGLE = qr{(?://)(?:[^\n]*)};
 my $JS_MULTI  = qr{(?:\/[*])(?:(?:[^*]+|[*](?!\/))*)(?:[*]\/)};
+my $PERL      = qr{(?:#)(?:[^\n]*)};
 my %PATTERNS  = (
-    perl       => qr{(?<!\\)(#[^\n]*?)$},
+    perl       => qr{(?<!\\)($PERL)},
     javascript => qr{(?<!\\)($JS_SINGLE|$JS_MULTI)},
 );
 
