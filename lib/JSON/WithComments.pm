@@ -49,6 +49,10 @@ my %PATTERNS  = (
 # This is also the style that will be used by decode_json.
 my $default_comment_style = 'javascript';
 
+# This table is used in lieu of per-object hashkeys, as the object is not a
+# hashref when the JSON::XS backend is in use.
+my %comment_style;
+
 sub import {
     my ($class, @imports) = @_;
 
@@ -79,7 +83,7 @@ sub comment_style {
         if (! $PATTERNS{$value}) {
             Carp::croak "Unknown comment_style ($value)";
         }
-        $self->{comment_style} = $value;
+        $comment_style{"$self"} = $value;
     }
 
     return $self;
@@ -88,7 +92,7 @@ sub comment_style {
 sub get_comment_style {
     my $self = shift;
 
-    return $self->{comment_style} || $default_comment_style;
+    return $comment_style{"$self"} || $default_comment_style;
 }
 
 sub decode {
@@ -102,6 +106,14 @@ sub decode {
     $text =~ s/$comment_re/q{ } x length($1)/ge;
 
     return $self->SUPER::decode($text);
+}
+
+sub DESTROY {
+    my $self = shift;
+
+    delete $comment_style{"$self"};
+
+    return;
 }
 
 1;
