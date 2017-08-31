@@ -141,7 +141,7 @@ JSON::WithComments - Parse JSON content with embedded comments
     JSON
     
     my $json = JSON::WithComments->new;
-    my $hashref = $json->decode($json);
+    my $hashref = $json->decode($content);
 
 =head1 DESCRIPTION
 
